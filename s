@@ -24,7 +24,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
             for _, part in pairs(folder:GetChildren()) do
                 if part:IsA("BasePart") then
                     local partSize = part.Size
-                    if partSize == Vector3.new(targetSize, 3, 1) then
+                    if partSize == Vector3.new(targetSize, 3, 3) then
                         setColor(part, targetColor)
                     end
                 end
