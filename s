@@ -7,10 +7,6 @@ local function setColor(part, color)
     colorAPI.color(part, color)
 end
 
-local function getRandomColor()
-    return Color3.new(math.random(), math.random(), math.random())
-end
-
 local lastSize = 5.01
 
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
@@ -19,18 +15,17 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         local num = string.match(msg, "%S+%s+(%S+)")
         
         if num and tonumber(num) >= 1 and tonumber(num) <= 30 then
-            local targetColor = getRandomColor()
             local targetSize = 5.01 + (tonumber(num) - 1) * 0.01
+            local gradientColor = Color3.new(1 - ((tonumber(num) - 1) / 29), 1, 0)
+            
             for _, part in pairs(folder:GetChildren()) do
                 if part:IsA("BasePart") then
                     local partSize = part.Size
-                    if partSize == Vector3.new(targetSize, 3, 3) then
-                        setColor(part, targetColor)
+                    if partSize == Vector3.new(targetSize, 3, 1) then
+                        setColor(part, gradientColor)
                     end
                 end
             end
-        else
-            warn("Usage: .spclr <num (1-30)>")
         end
     end
 end)
